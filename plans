@@ -1,0 +1,23 @@
+
+	Project Name: ETH/USDT Transactions Analytics
+
+	> Todo: Processor has to merge orders with similar day-hour-minute. The seeconds can be ignored.
+			> So processor has to send out a DTO for every minute
+			> Use DateTimeFormatter to omit seconds OR Create a new LocalDateTime using the
+			  method that doesn't take seconds... Before writing to Kafka using it as KEY.
+				
+    > FRONTEND:
+     -- Two time-series bar charts, one for sells(red) and the other for buys(green)
+     -- (Quantity vs Time Scale Of Seconds)
+
+	> Stream Processor: For every minute create a data structure that has aggregate quantity for sell and buy.
+
+	Modules:
+		data-extractor
+		dasboard.
+		stream-processor
+		common - [DTOs, Kafka Serdes, etc] (Copy common module from COVID-19 project)
+
+	Data transfer from Kafka OUTPUT_TOPIC to Dashboard UI has to be synchronously. The Output topic should only be polled when a request
+	Comes in from the frontend. Use JS schedule functionality to call an API endpoint every 25 seconds. The API request should then trigger
+    a poll  of the KAfka OUTPUT_TOPIC afterwards a data packet is returned. DO NOT USE ANY KIND OF SCHEDULED POLLING TO GET KAFKA DATA.
