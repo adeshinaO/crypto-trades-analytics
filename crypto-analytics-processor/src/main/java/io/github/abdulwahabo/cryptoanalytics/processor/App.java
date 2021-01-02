@@ -1,4 +1,4 @@
-package io.github.abdulwahabo.processor;
+package io.github.abdulwahabo.cryptoanalytics.processor;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

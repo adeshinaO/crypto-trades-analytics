@@ -1,4 +1,4 @@
-package io.github.abdulwahabo.extractor;
+package io.github.abdulwahabo.cryptoanalytics.extractor;
 
 public class Extractor {
 

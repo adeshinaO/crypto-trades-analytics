@@ -1,0 +1,46 @@
+<!Doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETH/USDT Analytics</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.css">
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+    <script th:src="@{https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js}"></script>
+</head>
+
+<body>
+    <input type="hidden" id="data-api-url" th:value="${data-api-url}">
+
+    <div class="columns is-centered">
+        <div class="column">
+            <h2>ETH/USDT Trades Analytics</h2>
+        </div>
+    </div>
+
+    <div class="columns is-centered">
+        <div class="column">
+            <h3 class="has-text-centered is-italic">
+                The first chart(red) shows the quantity of ETH that is traded for USDT every minute on <a href="https://exchange.blockchain.com/">Blockchain.com</a>.
+                The second chart (green) shows the reverse (USDT for ETH).
+            </h3>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="columns is-centered">
+        <div class="column is-10">
+            <canvas id="sell_chart"></canvas>
+        </div>
+    </div>
+
+    <div class="columns is-centered">
+        <div class="column is-10">
+            <canvas id="buy_chart"></canvas>
+        </div>
+    </div>
+
+    <script th:src="@{/js/dashboard.js}"></script>
+</body>
+</html>
