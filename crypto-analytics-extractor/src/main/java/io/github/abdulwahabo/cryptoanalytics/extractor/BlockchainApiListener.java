@@ -1,4 +1,4 @@
-package io.github.abdulwahabo.extractor;
+package io.github.abdulwahabo.cryptoanalytics.extractor;
 
 import java.net.http.WebSocket;
 import java.util.concurrent.CompletionStage;

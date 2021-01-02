@@ -1,4 +1,4 @@
-package io.github.abdulwahabo.common.model;
+package io.github.abdulwahabo.cryptoanalytics.common.model;
 
 public class TradeEvent {
 

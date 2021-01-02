@@ -1,10 +1,10 @@
-package io.github.abdulwahabo.common.serdes;
+package io.github.abdulwahabo.cryptoanalytics.common.serdes;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import io.github.abdulwahabo.common.exception.SerdeException;
-import io.github.abdulwahabo.common.model.AggregateTradeData;
+import io.github.abdulwahabo.cryptoanalytics.common.exception.SerdeException;
+import io.github.abdulwahabo.cryptoanalytics.common.model.AggregateTradeData;
 
 import java.util.Map;
 
