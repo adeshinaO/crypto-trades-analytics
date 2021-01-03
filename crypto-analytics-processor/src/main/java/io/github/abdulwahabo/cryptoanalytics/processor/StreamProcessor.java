@@ -3,7 +3,7 @@ package io.github.abdulwahabo.cryptoanalytics.processor;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class App {
+public class StreamProcessor {
 
     public static void main( String[] args ) {
 

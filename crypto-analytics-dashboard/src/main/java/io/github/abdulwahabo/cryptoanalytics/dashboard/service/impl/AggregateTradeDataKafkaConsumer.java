@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
-public class KafkaConsumerServiceImpl implements KafkaConsumerService {
+public class AggregateTradeDataKafkaConsumer implements KafkaConsumerService<AggregateTradeData> {
 
     private final KafkaConsumer<String, AggregateTradeData> consumer;
 
@@ -22,7 +22,7 @@ public class KafkaConsumerServiceImpl implements KafkaConsumerService {
     private String topic;
 
     @Autowired
-    public KafkaConsumerServiceImpl(KafkaConsumer<String, AggregateTradeData> consumer) {
+    public AggregateTradeDataKafkaConsumer(KafkaConsumer<String, AggregateTradeData> consumer) {
         this.consumer = consumer;
     }
 
