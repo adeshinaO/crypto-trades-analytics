@@ -37,14 +37,21 @@ public class BlockchainApiWebSocketListener implements WebSocket.Listener {
         webSocket.request(1);
         if (last) {
             try {
-                TradeEvent tradeEvent = mapper.readValue(builder.toString(), TradeEvent.class);
-                ZonedDateTime zdt = ZonedDateTime.parse(tradeEvent.getTimestamp(), DateTimeFormatter.ISO_INSTANT);
+                String messageJson = builder.toString();
+                TradeEvent tradeEvent = mapper.readValue(messageJson, TradeEvent.class);
+                ZonedDateTime zdt = ZonedDateTime.parse(tradeEvent.getTimestamp(), DateTimeFormatter.ISO_DATE_TIME);
 
                 // Remove seconds and nanoseconds.
                 LocalDateTime localDateTime =
                         LocalDateTime.of(zdt.getYear(), zdt.getMonth(), zdt.getDayOfMonth(), zdt.getHour(), zdt.getMinute());
                 String timeString = localDateTime.toString();
-                kafkaProducer.send(timeString, tradeEvent);
+
+                if (tradeEvent.getEvent().equals("updated")) {
+                    kafkaProducer.send(timeString, tradeEvent);
+                } else {
+                    LOGGER.info("New non-update event: " + messageJson);
+                }
+
                 builder = new StringBuilder();
                 completable.complete(null);
                 CompletionStage<?> completionStage = completable;
