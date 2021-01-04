@@ -1,6 +1,6 @@
 package io.github.abdulwahabo.cryptoanalytics.extractor;
 
-import io.github.abdulwahabo.cryptoanalytics.common.CommonPropertiesHelper;
+import io.github.abdulwahabo.cryptoanalytics.common.CommonPropertiesProvider;
 import io.github.abdulwahabo.cryptoanalytics.common.exception.PropertiesFileException;
 import io.github.abdulwahabo.cryptoanalytics.common.model.TradeEvent;
 import io.github.abdulwahabo.cryptoanalytics.common.serdes.TradeEventSerde;
@@ -47,14 +47,14 @@ public class Extractor {
     }
 
     private static TradeEventKafkaProducer kafkaProducer() throws PropertiesFileException {
-        CommonPropertiesHelper propertiesHelper = new CommonPropertiesHelper();
-        propertiesHelper.loadProperties();
+        CommonPropertiesProvider properties = new CommonPropertiesProvider();
+        properties.loadProperties();
         Map<String, Object> kafkaConfig = new HashMap<>();
-        kafkaConfig.put(ProducerConfig.ACKS_CONFIG, propertiesHelper.kafkaAcksConfig());
-        kafkaConfig.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, propertiesHelper.kafkaServers());
-        kafkaConfig.put(ProducerConfig.CLIENT_ID_CONFIG, propertiesHelper.kafkaExtractorId());
+        kafkaConfig.put(ProducerConfig.ACKS_CONFIG, properties.kafkaAcksConfig());
+        kafkaConfig.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, properties.kafkaServers());
+        kafkaConfig.put(ProducerConfig.CLIENT_ID_CONFIG, properties.kafkaExtractorId());
         KafkaProducer<String, TradeEvent> kafkaProducerService = new KafkaProducer<>(kafkaConfig, new StringSerializer(), new TradeEventSerde());
-        TradeEventKafkaProducer kafkaProducer = new TradeEventKafkaProducer(kafkaProducerService, propertiesHelper.inputTopic());
+        TradeEventKafkaProducer kafkaProducer = new TradeEventKafkaProducer(kafkaProducerService, properties.inputTopic());
         Runtime.getRuntime().addShutdownHook(new Thread(kafkaProducer::close));
         return kafkaProducer;
     }

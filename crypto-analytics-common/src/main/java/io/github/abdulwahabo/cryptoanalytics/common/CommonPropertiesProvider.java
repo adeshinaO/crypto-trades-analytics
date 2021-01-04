@@ -7,7 +7,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 // TODO: JavaDoc should warn that loadProperties() is to be called first.
-public class CommonPropertiesHelper {
+public class CommonPropertiesProvider {
 
     private final Properties properties = new Properties();
 
