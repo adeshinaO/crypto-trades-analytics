@@ -42,7 +42,7 @@ public class Extractor {
                                     .join();
 
         webSocket.sendText(subscribeMsg(), true);
-        LOGGER.info("Subscribed to Trades channel for ETH-USDT");
+        LOGGER.info("Subscribed to trades channel for BTC-USD");
         return latch;
     }
 

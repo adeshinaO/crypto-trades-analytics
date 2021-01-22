@@ -53,8 +53,13 @@ var refreshDataset = function () {
     fetch(api).then(response => {
         if (response.status == 200) {
             response.json().then(dataset => {
+
+
                 buy_chart.data.datasets[0].data = dataset.buy;
                 sell_chart.data.datasets[0].data = dataset.sell;
+
+                // Todo: Check and replace.
+
                 sell_chart.update();
                 buy_chart.update();
             });

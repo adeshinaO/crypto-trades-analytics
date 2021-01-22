@@ -63,7 +63,7 @@ public class StreamProcessor {
             aggregate.setAggregateBuys(bought + Double.parseDouble(tradeEvent.getQty()));
         } else if (tradeEvent.getSide().equals("sell")) {
             double sold = aggregate.getAggregateBuys();
-            aggregate.setAggregateBuys(sold + Double.parseDouble(tradeEvent.getQty()));
+            aggregate.setAggregateSales(sold + Double.parseDouble(tradeEvent.getQty()));
         }
         return aggregate;
     });
