@@ -5,13 +5,6 @@ import java.util.List;
 
 public class DashboardDataset {
 
-    // todo: Data for the barchart:
-    //      An array of elements in the format.
-    //      {
-    //          t: new Date(), or "2020-2-2T09:03:00"
-    //          y: 43.r
-    //      }
-
     private List<Data> sell;
     private List<Data> buy;
 

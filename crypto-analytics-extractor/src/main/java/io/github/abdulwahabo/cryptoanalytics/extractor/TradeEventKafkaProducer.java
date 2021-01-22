@@ -8,9 +8,6 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- *  todo:: write JavaDOC
- */
 public class TradeEventKafkaProducer implements KafkaProducerService<TradeEvent> {
 
     private Logger logger = LoggerFactory.getLogger(TradeEventKafkaProducer.class);
@@ -29,7 +26,7 @@ public class TradeEventKafkaProducer implements KafkaProducerService<TradeEvent>
             if (exception != null) {
                 logger.error("Failed to write record", exception);
             } else {
-                logger.info("one record written to partition: " + metadata.partition() + "of topic: " + metadata.topic());
+                logger.info("one record written to partition: " + metadata.partition() + " of topic: " + metadata.topic());
             }
         }));
     }

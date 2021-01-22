@@ -11,8 +11,6 @@ import java.util.Map;
 import org.apache.kafka.common.serialization.Deserializer;
 import org.apache.kafka.common.serialization.Serializer;
 
-// TODO: Consider unit testing for this class.
-
 public class TradeEventSerde implements Serializer<TradeEvent>, Deserializer<TradeEvent> {
 
     private final ObjectMapper mapper = new ObjectMapper();

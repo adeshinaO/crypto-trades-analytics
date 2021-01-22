@@ -47,7 +47,7 @@ var buy_chart = new Chart(buy_chart_ctx, {
     options: chart_options
 });
 
-var api = document.getElementById("data-api-url").value;
+var api = document.getElementById("data_api_url").value;
 
 var refreshDataset = function () {
     fetch(api).then(response => {
@@ -55,7 +55,9 @@ var refreshDataset = function () {
             response.json().then(dataset => {
                 buy_chart.data.datasets[0].data = dataset.buy;
                 sell_chart.data.datasets[0].data = dataset.sell;
-            })
+                sell_chart.update();
+                buy_chart.update();
+            });
         } else {
             console.warn("STATUS CODE: " + response.status);
         }
@@ -63,4 +65,4 @@ var refreshDataset = function () {
 }
 
 refreshDataset();
-setInterval(refreshDataset, 20000);
+setInterval(refreshDataset, 10000);

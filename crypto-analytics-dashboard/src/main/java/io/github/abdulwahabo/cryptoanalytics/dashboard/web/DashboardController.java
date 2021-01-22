@@ -4,6 +4,7 @@ import io.github.abdulwahabo.cryptoanalytics.dashboard.model.DashboardDataset;
 import io.github.abdulwahabo.cryptoanalytics.dashboard.service.DashboardService;
 
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class DashboardController {
 
     @Value("${host}")
-    private String host; // todo: write util to end without slash
+    private String host;
 
     private DashboardService dashboardService;
 
@@ -28,7 +29,7 @@ public class DashboardController {
 
     @GetMapping("/dashboard")
     public ModelAndView dashboard(ModelMap modelMap) {
-        modelMap.addAttribute("data-api-url", host.concat("/data"));
+        modelMap.addAttribute("data_api_url", host.concat("/data"));
         return new ModelAndView("dashboard");
     }
 

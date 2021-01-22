@@ -21,7 +21,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Extractor {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(Extractor.class);
 
     public static void main(String[] args) {
@@ -43,6 +42,7 @@ public class Extractor {
                                     .join();
 
         webSocket.sendText(subscribeMsg(), true);
+        LOGGER.info("Subscribed to Trades channel for ETH-USDT");
         return latch;
     }
 
@@ -63,7 +63,7 @@ public class Extractor {
         return "{\n"
                 + "  \"action\": \"subscribe\",\n"
                 + "  \"channel\": \"trades\",\n"
-                + "  \"symbol\": \"ETH-USDT\"\n"
+                + "  \"symbol\": \"BTC-USD\"\n"
                 + "}";
     }
 }

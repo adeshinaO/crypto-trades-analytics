@@ -1,14 +1,14 @@
 package io.github.abdulwahabo.cryptoanalytics.common.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class TradeEvent {
 
     private String seqnum;
     private String event;
     private String symbol;
-
-    // TODO: Create a datetime without seconds and USE AS KAFKA PRODUCER KEY
     private String timestamp;
-
     private String side;
     private String qty;
 
@@ -21,7 +21,6 @@ public class TradeEvent {
     }
 
     public String getSymbol() {
-
         return symbol;
     }
 
@@ -30,8 +29,6 @@ public class TradeEvent {
     }
 
     public String getSide() {
-
-
         return side;
     }
 
@@ -56,7 +53,6 @@ public class TradeEvent {
     }
 
     public String getEvent() {
-
         return event;
     }
 

@@ -1,6 +1,7 @@
 package io.github.abdulwahabo.cryptoanalytics.processor;
 
 import io.github.abdulwahabo.cryptoanalytics.common.CommonPropertiesProvider;
+import io.github.abdulwahabo.cryptoanalytics.common.exception.PropertiesFileException;
 import io.github.abdulwahabo.cryptoanalytics.common.model.AggregateTradeData;
 import io.github.abdulwahabo.cryptoanalytics.common.model.TradeEvent;
 import io.github.abdulwahabo.cryptoanalytics.common.serdes.AggregateTradeDataSerde;
@@ -32,10 +33,10 @@ public class StreamProcessor {
     private static final Serde<AggregateTradeData> TRADE_AGGREGATE_SERDE = Serdes.serdeFrom(new AggregateTradeDataSerde(), new AggregateTradeDataSerde());
     private static final CommonPropertiesProvider properties = new CommonPropertiesProvider();
 
-    public static void main( String[] args ) {
+    public static void main( String[] args ) throws PropertiesFileException {
         StreamsBuilder builder = new StreamsBuilder();
         Consumed<String, TradeEvent> consumedWith = Consumed.with(Serdes.String(), TRADE_DATA_SERDE);
-
+        properties.loadProperties();
         KStream<String, TradeEvent> source = builder.stream(properties.inputTopic(), consumedWith);
         KGroupedStream<String, TradeEvent> groupedStream = source.groupByKey();
 

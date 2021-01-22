@@ -39,14 +39,16 @@ public class BlockchainApiWebSocketListener implements WebSocket.Listener {
             try {
                 String messageJson = builder.toString();
                 TradeEvent tradeEvent = mapper.readValue(messageJson, TradeEvent.class);
-                ZonedDateTime zdt = ZonedDateTime.parse(tradeEvent.getTimestamp(), DateTimeFormatter.ISO_DATE_TIME);
-
-                // Remove seconds and nanoseconds.
-                LocalDateTime localDateTime =
-                        LocalDateTime.of(zdt.getYear(), zdt.getMonth(), zdt.getDayOfMonth(), zdt.getHour(), zdt.getMinute());
-                String timeString = localDateTime.toString();
-
+                LOGGER.info("New Trade Data:\n" + messageJson);
                 if (tradeEvent.getEvent().equals("updated")) {
+                    ZonedDateTime zdt = ZonedDateTime.parse(tradeEvent.getTimestamp(), DateTimeFormatter.ISO_DATE_TIME);
+
+                    // Remove seconds and nanoseconds.
+                    LocalDateTime localDateTime =
+                            LocalDateTime.of(zdt.getYear(), zdt.getMonth(), zdt.getDayOfMonth(), zdt.getHour(),
+                                    zdt.getMinute());
+                    String timeString = localDateTime.toString();
+                    LOGGER.info("Sending one item to Kafka producer service");
                     kafkaProducer.send(timeString, tradeEvent);
                 } else {
                     LOGGER.info("New non-update event: " + messageJson);
@@ -72,16 +74,13 @@ public class BlockchainApiWebSocketListener implements WebSocket.Listener {
 
     @Override
     public CompletionStage<?> onClose(WebSocket webSocket, int statusCode, String reason) {
-        kafkaProducer.close();
-        latch.countDown();
         LOGGER.info("Closing WebSocket Connection | Reason: " + reason + " | Status code: " + statusCode);
         return null;
     }
 
     @Override
     public void onError(WebSocket webSocket, Throwable error) {
-        kafkaProducer.close();
-        latch.countDown();
         LOGGER.error("Error in WebSocket connection", error);
+        latch.countDown();
     }
 }

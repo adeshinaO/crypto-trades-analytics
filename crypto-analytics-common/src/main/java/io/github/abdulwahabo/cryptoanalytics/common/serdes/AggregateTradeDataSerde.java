@@ -11,7 +11,6 @@ import java.util.Map;
 import org.apache.kafka.common.serialization.Deserializer;
 import org.apache.kafka.common.serialization.Serializer;
 
-/// TODO: consider unit test for this class.
 public class AggregateTradeDataSerde implements Deserializer<AggregateTradeData>, Serializer<AggregateTradeData> {
 
     private final ObjectMapper mapper = new ObjectMapper();
